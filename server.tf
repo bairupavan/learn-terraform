@@ -1,3 +1,6 @@
+variable "instance_type" {
+  default = "t3.micro"
+}
 data "aws_ami" "image" {
   most_recent = true
   name_regex  = "Centos-8-DevOps-Practice"
@@ -6,7 +9,7 @@ data "aws_ami" "image" {
 }
 resource "aws_instance" "frontend" {
   ami           = data.aws_ami.image.image_id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
 
   tags = {
     Name = "frontend"
